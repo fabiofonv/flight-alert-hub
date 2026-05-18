@@ -1,0 +1,17 @@
+# UV / Python Environment
+.venv/
+.env
+
+# Build / Distribution
+dist/
+build/
+.eggs/
+*.egg-info/
+
+# Caches
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+
+# Local System Files
+.DS_Store
