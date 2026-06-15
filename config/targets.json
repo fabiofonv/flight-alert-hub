@@ -1,0 +1,24 @@
+[
+  {
+    "origem": "CPV",
+    "destino": "BSB",
+    "data_inicio": "15/06/2026",
+    "data_fim": "25/06/2026",
+    "tipo_busca": "direto",
+    "limites_preco": {
+      "preco_teto_reais": 300.00,
+      "preco_teto_milhas": 15000
+    }
+  },
+  {
+    "origem": "GRU",
+    "destino": "MIA",
+    "data_inicio": "10/11/2026",
+    "data_fim": "20/11/2026",
+    "tipo_busca": "stopover",
+    "limites_preco": {
+      "preco_teto_reais": 2500.00,
+      "preco_teto_milhas": 70000
+    }
+  }
+]
