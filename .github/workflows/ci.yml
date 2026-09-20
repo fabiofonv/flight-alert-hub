@@ -1,0 +1,29 @@
+name: CI - Integracao Continua
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do Código
+        uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Configurar Python 3.13
+        run: uv python install 3.13
+
+      - name: Instalar Dependências
+        run: uv sync
+
+      - name: Executar Linter e Testes
+        run: |
+          uv run pytest

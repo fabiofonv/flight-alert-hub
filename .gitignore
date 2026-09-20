@@ -15,3 +15,5 @@ __pycache__/
 
 # Local System Files
 .DS_Store
+
+.idea

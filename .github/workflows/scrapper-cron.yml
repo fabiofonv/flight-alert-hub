@@ -1,0 +1,36 @@
+name: Scheduled Flight Scraper
+
+on:
+  schedule:
+    # Roda todos os dias às 08:00, 14:00 e 20:00 UTC (Sintaxe Cron)
+    - cron: '0 8,14,20 * * *'
+  # Permite acionar manualmente o script pelo painel do GitHub quando quiser testar
+  workflow_dispatch:
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "latest"
+
+      - name: Configurar Python 3.13
+        run: uv python install 3.13
+
+      - name: Instalar dependências
+        run: uv sync
+
+      - name: Instalar dependências do Playwright
+        run: uv run playwright install --with-deps chromium
+
+      - name: Executar Scraper
+        env:
+          # Injeta as credenciais dos mensageiros guardadas nas Secrets do GitHub
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: uv run python main.py
